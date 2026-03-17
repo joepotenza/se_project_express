@@ -16,7 +16,7 @@ const getClothingItems = (req, res) => {
             .status(NOT_FOUND_ERROR)
             .send({ message: "No clothing items found" });
         }
-        res.send(items);
+        return res.send(items);
       })
       .catch((err) => {
         console.error(err);
@@ -53,16 +53,15 @@ const deleteClothingItem = (req, res) => {
   try {
     ClothingItem.findByIdAndDelete(req.params.itemId)
       .orFail()
-      .then((item) =>
-        res.send({ message: "Clothing item deleted successfully" })
-      )
+      .then(() => res.send({ message: "Clothing item deleted successfully" }))
       .catch((err) => {
         console.error(err);
         if (err.name === "DocumentNotFoundError") {
           return res
             .status(NOT_FOUND_ERROR)
             .send({ message: "Clothing item not found" });
-        } else if (err.name === "CastError") {
+        }
+        if (err.name === "CastError") {
           return res
             .status(INVALID_DATA_ERROR)
             .send({ message: "Invalid Clothing Item ID" });
@@ -83,14 +82,15 @@ const likeClothingItem = (req, res) => {
       { new: true }
     )
       .orFail()
-      .then((item) => res.send({ message: "Clothing item liked successfully" }))
+      .then(() => res.send({ message: "Clothing item liked successfully" }))
       .catch((err) => {
         console.error(err);
         if (err.name === "DocumentNotFoundError") {
           return res
             .status(NOT_FOUND_ERROR)
             .send({ message: "Clothing item not found" });
-        } else if (err.name === "CastError") {
+        }
+        if (err.name === "CastError") {
           return res
             .status(INVALID_DATA_ERROR)
             .send({ message: "Invalid Clothing Item ID" });
@@ -111,16 +111,15 @@ const unlikeClothingItem = (req, res) => {
       { new: true }
     )
       .orFail()
-      .then((item) =>
-        res.send({ message: "Clothing item unliked successfully" })
-      )
+      .then(() => res.send({ message: "Clothing item unliked successfully" }))
       .catch((err) => {
         console.error(err);
         if (err.name === "DocumentNotFoundError") {
           return res
             .status(NOT_FOUND_ERROR)
             .send({ message: "Clothing item not found" });
-        } else if (err.name === "CastError") {
+        }
+        if (err.name === "CastError") {
           return res
             .status(INVALID_DATA_ERROR)
             .send({ message: "Invalid Clothing Item ID" });

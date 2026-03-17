@@ -20,6 +20,7 @@ module.exports = {
     sourceType: "module",
   },
   rules: {
+    "consistent-return": "off",
     "no-underscore-dangle": [
       "error",
       {

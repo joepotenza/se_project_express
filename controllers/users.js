@@ -15,7 +15,7 @@ const getUsers = (req, res) => {
             .status(NOT_FOUND_ERROR)
             .send({ message: "No users found" });
         }
-        res.send(users);
+        return res.send(users);
       })
       .catch((err) => {
         console.error(err);
@@ -39,7 +39,8 @@ const getUser = (req, res) => {
           return res
             .status(NOT_FOUND_ERROR)
             .send({ message: "User not found" });
-        } else if (err.name === "CastError") {
+        }
+        if (err.name === "CastError") {
           return res
             .status(INVALID_DATA_ERROR)
             .send({ message: "Invalid User ID" });
