@@ -19,11 +19,15 @@ const getUsers = (req, res) => {
       })
       .catch((err) => {
         console.error(err);
-        return res.status(INTERNAL_SERVER_ERROR).send({ message: err.message });
+        return res
+          .status(INTERNAL_SERVER_ERROR)
+          .send({ message: "An error has occurred on the server" });
       });
   } catch (err) {
     console.error(err);
-    return res.status(INTERNAL_SERVER_ERROR).send({ message: err.message });
+    return res
+      .status(INTERNAL_SERVER_ERROR)
+      .send({ message: "An error has occurred on the server" });
   }
 };
 
@@ -45,11 +49,15 @@ const getUser = (req, res) => {
             .status(INVALID_DATA_ERROR)
             .send({ message: "Invalid User ID" });
         }
-        return res.status(INTERNAL_SERVER_ERROR).send({ message: err.message });
+        return res
+          .status(INTERNAL_SERVER_ERROR)
+          .send({ message: "An error has occurred on the server" });
       });
   } catch (err) {
     console.error(err);
-    return res.status(INTERNAL_SERVER_ERROR).send({ message: err.message });
+    return res
+      .status(INTERNAL_SERVER_ERROR)
+      .send({ message: "An error has occurred on the server" });
   }
 };
 
@@ -64,11 +72,15 @@ const createUser = (req, res) => {
         if (err.name === "ValidationError") {
           return res.status(INVALID_DATA_ERROR).send({ message: err.message });
         }
-        return res.status(INTERNAL_SERVER_ERROR).send({ message: err.message });
+        return res
+          .status(INTERNAL_SERVER_ERROR)
+          .send({ message: "An error has occurred on the server" });
       });
   } catch (err) {
     console.error(err);
-    return res.status(INTERNAL_SERVER_ERROR).send({ message: err.message });
+    return res
+      .status(INTERNAL_SERVER_ERROR)
+      .send({ message: "An error has occurred on the server" });
   }
 };
 

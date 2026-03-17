@@ -40,11 +40,11 @@ const createClothingItem = (req, res) => {
         if (err.name === "ValidationError") {
           return res.status(INVALID_DATA_ERROR).send({ message: err.message });
         }
-        return res.status(INTERNAL_SERVER_ERROR).send({ message: err.message });
+        return res.status(INTERNAL_SERVER_ERROR).send({ message: "An error has occurred on the server" });
       });
   } catch (err) {
     console.error(err);
-    return res.status(INTERNAL_SERVER_ERROR).send({ message: err.message });
+    return res.status(INTERNAL_SERVER_ERROR).send({ message: "An error has occurred on the server" });
   }
 };
 
@@ -66,11 +66,11 @@ const deleteClothingItem = (req, res) => {
             .status(INVALID_DATA_ERROR)
             .send({ message: "Invalid Clothing Item ID" });
         }
-        return res.status(INTERNAL_SERVER_ERROR).send({ message: err.message });
+        return res.status(INTERNAL_SERVER_ERROR).send({ message: "An error has occurred on the server" });
       });
   } catch (err) {
     console.error(err);
-    return res.status(INTERNAL_SERVER_ERROR).send({ message: err.message });
+    return res.status(INTERNAL_SERVER_ERROR).send({ message: "An error has occurred on the server"e });
   }
 };
 
@@ -82,7 +82,7 @@ const likeClothingItem = (req, res) => {
       { new: true }
     )
       .orFail()
-      .then(() => res.send({ message: "Clothing item liked successfully" }))
+      .then((item) => res.send(item))
       .catch((err) => {
         console.error(err);
         if (err.name === "DocumentNotFoundError") {
@@ -95,11 +95,11 @@ const likeClothingItem = (req, res) => {
             .status(INVALID_DATA_ERROR)
             .send({ message: "Invalid Clothing Item ID" });
         }
-        return res.status(INTERNAL_SERVER_ERROR).send({ message: err.message });
+        return res.status(INTERNAL_SERVER_ERROR).send({ message: "An error has occurred on the server" });
       });
   } catch (err) {
     console.error(err);
-    return res.status(INTERNAL_SERVER_ERROR).send({ message: err.message });
+    return res.status(INTERNAL_SERVER_ERROR).send({ message: "An error has occurred on the server" });
   }
 };
 
@@ -111,7 +111,7 @@ const unlikeClothingItem = (req, res) => {
       { new: true }
     )
       .orFail()
-      .then(() => res.send({ message: "Clothing item unliked successfully" }))
+      .then((item) => res.send(item))
       .catch((err) => {
         console.error(err);
         if (err.name === "DocumentNotFoundError") {
@@ -124,11 +124,11 @@ const unlikeClothingItem = (req, res) => {
             .status(INVALID_DATA_ERROR)
             .send({ message: "Invalid Clothing Item ID" });
         }
-        return res.status(INTERNAL_SERVER_ERROR).send({ message: err.message });
+        return res.status(INTERNAL_SERVER_ERROR).send({ message: "An error has occurred on the server" });
       });
   } catch (err) {
     console.error(err);
-    return res.status(INTERNAL_SERVER_ERROR).send({ message: err.message });
+    return res.status(INTERNAL_SERVER_ERROR).send({ message: "An error has occurred on the server" });
   }
 };
 
