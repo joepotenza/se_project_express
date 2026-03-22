@@ -5,7 +5,7 @@ const { JWT_SECRET } = require("../utils/config");
 const auth = (req, res, next) => {
   // Get token from authorization header
   const authHeader = req.headers.authorization;
-  if (!authHeader) {
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res
       .status(AUTHORIZATION_ERROR)
       .send({ message: "Invalid authorization" });
