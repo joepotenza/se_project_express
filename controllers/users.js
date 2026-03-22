@@ -12,33 +12,7 @@ const {
   INTERNAL_SERVER_ERROR,
 } = require("../utils/errors");
 
-// Get all users
-const getUsers = (req, res) => {
-  try {
-    User.find()
-      .then((users) => {
-        if (!users) {
-          return res
-            .status(NOT_FOUND_ERROR)
-            .send({ message: "No users found" });
-        }
-        return res.send(users);
-      })
-      .catch((err) => {
-        console.error(err);
-        return res
-          .status(INTERNAL_SERVER_ERROR)
-          .send({ message: "An error has occurred on the server" });
-      });
-  } catch (err) {
-    console.error(err);
-    return res
-      .status(INTERNAL_SERVER_ERROR)
-      .send({ message: "An error has occurred on the server" });
-  }
-};
-
-// Get current user
+// GET /users/me -- Get current user
 const getCurrentUser = (req, res) => {
   try {
     User.findById(req.user._id)
@@ -68,7 +42,7 @@ const getCurrentUser = (req, res) => {
   }
 };
 
-// Update current user info
+// PATCH /users/me -- Update current user info
 const updateUserInfo = (req, res) => {
   try {
     if (!req.body.name || !req.body.avatar) {
@@ -113,7 +87,7 @@ const updateUserInfo = (req, res) => {
   }
 };
 
-// Create a new user
+// POST /signup -- Create a new user
 const createUser = (req, res) => {
   try {
     const { name, avatar, email, password } = req.body;
@@ -127,7 +101,7 @@ const createUser = (req, res) => {
         User.create({ name, avatar, email, password: hashedPassword })
           .then((user) => {
             /*
-              "Fun" bug fixed: delete function does not work against the raw user object since it is technically a Mongoose document
+              Bug fixed: delete does not work against the raw user object since it is technically a Mongoose document
               and not a regular JS object
             */
             const newUser = user.toObject();
@@ -162,8 +136,8 @@ const createUser = (req, res) => {
   }
 };
 
-// Login with email and password
-const loginUser = (req, res) => {
+// POST /signin -- Login with email and password
+const login = (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(INVALID_DATA_ERROR).send({ message: "Invalid Data" });
@@ -183,9 +157,8 @@ const loginUser = (req, res) => {
 };
 
 module.exports = {
-  getUsers,
   getCurrentUser,
   updateUserInfo,
   createUser,
-  loginUser,
+  login,
 };

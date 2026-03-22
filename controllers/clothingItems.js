@@ -6,7 +6,7 @@ const {
   INTERNAL_SERVER_ERROR,
 } = require("../utils/errors");
 
-// Get all clothing items
+// GET /items -- Get all clothing items
 const getClothingItems = (req, res) => {
   try {
     ClothingItem.find()
@@ -33,7 +33,7 @@ const getClothingItems = (req, res) => {
   }
 };
 
-// Create a new clothing item
+// POST /items -- Create a new clothing item
 const createClothingItem = (req, res) => {
   try {
     const { name, weather, imageUrl } = req.body;
@@ -59,7 +59,7 @@ const createClothingItem = (req, res) => {
   }
 };
 
-// Delete a clothing item by ID
+// DELETE /items/:itemId -- Delete a clothing item by ID
 const deleteClothingItem = (req, res) => {
   try {
     /*
@@ -116,6 +116,7 @@ const deleteClothingItem = (req, res) => {
   }
 };
 
+// PUT /items/:itemId/likes -- Like a clothing item
 const likeClothingItem = (req, res) => {
   try {
     ClothingItem.findByIdAndUpdate(
@@ -149,6 +150,7 @@ const likeClothingItem = (req, res) => {
   }
 };
 
+// DELETE /items/:itemId/likes -- Un-like a clothing item
 const unlikeClothingItem = (req, res) => {
   try {
     ClothingItem.findByIdAndUpdate(
