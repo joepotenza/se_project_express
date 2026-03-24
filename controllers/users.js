@@ -45,16 +45,20 @@ const getCurrentUser = (req, res) => {
 // PATCH /users/me -- Update current user info
 const updateUserInfo = (req, res) => {
   try {
-    if (!req.body.name || !req.body.avatar) {
+    let updatedInfo = {};
+    if (!req.body.name && !req.body.avatar) {
       return res.status(INVALID_DATA_ERROR).send({ message: "Invalid Data" });
+    }
+    if (req.body.name) {
+      updatedInfo.name = req.body.name;
+    }
+    if (req.body.avatar) {
+      updatedInfo.avatar = req.body.avatar;
     }
     User.findByIdAndUpdate(
       req.user._id,
       {
-        $set: {
-          name: req.body.name,
-          avatar: req.body.avatar,
-        },
+        $set: updatedInfo,
       },
       {
         runValidators: true,
@@ -118,7 +122,7 @@ const createUser = (req, res) => {
             if (err.code && err.code === 11000) {
               return res
                 .status(DATA_CONFLICT_ERROR)
-                .send({ message: "Invalid Data" });
+                .send({ message: "Email already exists" });
             }
             return res
               .status(INTERNAL_SERVER_ERROR)
@@ -126,7 +130,10 @@ const createUser = (req, res) => {
           });
       })
       .catch((err) => {
-        throw err; // Throw the error to the outer try/catch
+        console.error(err);
+        return res
+          .status(INTERNAL_SERVER_ERROR)
+          .send({ message: "An error has occurred on the server" });
       });
   } catch (err) {
     console.error(err);
