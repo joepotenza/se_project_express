@@ -7,9 +7,11 @@ const { PORT = 3001 } = process.env;
 
 mongoose.connect("mongodb://127.0.0.1/wtwr_db").catch(console.error);
 
+// All requests are JSON based
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// CORS for front end authorization (Sprint 14)
 app.use(cors());
 
 app.use("/", require("./routes/index"));

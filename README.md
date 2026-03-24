@@ -10,6 +10,10 @@ This is the Back End for the WTWR (What to Wear) project located at [https://git
 - Mongoose
 - ESLint + Prettier
 
+## Project Preview
+
+A walkthrough for the Back End can be found at [https://drive.google.com/file/d/1AHoDeRBhWEgicF6doNPH9nxnDzWvALCJ/view?usp=sharing](https://drive.google.com/file/d/1AHoDeRBhWEgicF6doNPH9nxnDzWvALCJ/view?usp=sharing).
+
 ## Available Endpoints
 
 ### POST /signup
@@ -28,7 +32,7 @@ Adds a new user and returns the user record
   "_id": "69bf913f4174d1f824972e54",
   "name": "Joe Potenza",
   "email": "joseph.potenza@gmail.com",
-  "avatar": "https://i.imgur.com/ZBAqJS7.png",
+  "avatar": "https://www.notmyavatar.com",
   "__v": 0
 }
 ```
@@ -61,7 +65,7 @@ Returns the current logged in user
   "_id": "69bf913f4174d1f824972e54",
   "name": "Joe Potenza",
   "email": "joseph.potenza@gmail.com",
-  "avatar": "https://i.imgur.com/ZBAqJS7.png",
+  "avatar": "https://www.notmyavatar.com",
   "__v": 0
 }
 ```
