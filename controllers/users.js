@@ -45,7 +45,7 @@ const getCurrentUser = (req, res) => {
 // PATCH /users/me -- Update current user info
 const updateUserInfo = (req, res) => {
   try {
-    let updatedInfo = {};
+    const updatedInfo = {};
     if (!req.body.name && !req.body.avatar) {
       return res.status(INVALID_DATA_ERROR).send({ message: "Invalid Data" });
     }
