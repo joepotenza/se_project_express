@@ -55,6 +55,7 @@ const updateUserInfo = (req, res) => {
     if (req.body.avatar) {
       updatedInfo.avatar = req.body.avatar;
     }
+    console.log("updating user info ", updatedInfo);
     User.findByIdAndUpdate(
       req.user._id,
       {
