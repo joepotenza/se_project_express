@@ -10,7 +10,6 @@ const {
 const getClothingItems = (req, res) => {
   try {
     ClothingItem.find()
-      .populate("owner")
       .then((items) => {
         if (!items) {
           return res
