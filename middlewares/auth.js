@@ -1,32 +1,31 @@
 const jwt = require("jsonwebtoken");
-const { AUTHORIZATION_ERROR } = require("../utils/errors");
+const UnauthorizedError = require("../errors/UnauthorizedError");
 const { JWT_SECRET } = require("../utils/config");
+
+// TBD: How to integrate error-handler here
 
 const auth = (req, res, next) => {
   // Get token from authorization header
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res
-      .status(AUTHORIZATION_ERROR)
-      .send({ message: "Invalid authorization" });
+    throw new UnauthorizedError("Invalid authorization");
   }
-
   try {
     const token = authHeader.replace("Bearer ", "");
     const payload = jwt.verify(token, JWT_SECRET);
     if (!payload || !payload._id) {
-      return res
-        .status(AUTHORIZATION_ERROR)
-        .send({ message: "Invalid authorization" });
+      throw new UnauthorizedError("Invalid authorization");
     }
 
     // User authenticated successfully, update the request with the user data
     req.user = payload;
     next();
-  } catch (error) {
-    return res
-      .status(AUTHORIZATION_ERROR)
-      .send({ message: "Invalid authorization" });
+  } catch (err) {
+    if (err.name === "JsonWebTokenError") {
+      next(new UnauthorizedError("Invalid authorization"));
+    } else {
+      next(err);
+    }
   }
 };
 
