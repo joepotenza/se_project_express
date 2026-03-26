@@ -12,7 +12,11 @@ This is the Back End for the WTWR (What to Wear) project located at [https://git
 
 ## Project Preview
 
-A walkthrough for the Back End can be found at [https://drive.google.com/file/d/1AHoDeRBhWEgicF6doNPH9nxnDzWvALCJ/view?usp=sharing](https://drive.google.com/file/d/1AHoDeRBhWEgicF6doNPH9nxnDzWvALCJ/view?usp=sharing).
+The API can be previewed at [https://api.wtwr.bigjoepo.com/](https://api.wtwr.bigjoepo.com/)
+
+A walkthrough video is available:
+
+- [API Walkthrough](https://drive.google.com/file/d/1AHoDeRBhWEgicF6doNPH9nxnDzWvALCJ/view?usp=sharing)
 
 ## Available Endpoints
 
