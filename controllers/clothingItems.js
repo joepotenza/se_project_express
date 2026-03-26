@@ -9,7 +9,7 @@ const getClothingItems = (req, res, next) => {
     ClothingItem.find()
       .then((items) => {
         if (!items || !items.length) {
-          throw new NotFoundError("No clothing items found");
+          return res.send([]);
         }
         return res.send(items);
       })
