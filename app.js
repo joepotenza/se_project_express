@@ -23,6 +23,13 @@ mongoose.connect("mongodb://localhost:27017/wtwr_db").catch(console.error);
 // Log requests
 app.use(requestLogger);
 
+// Crash test
+app.get("/crash-test", () => {
+  setTimeout(() => {
+    throw new Error("Server will crash now");
+  }, 0);
+});
+
 app.use("/", require("./routes/index"));
 
 app.use("/", () => {
