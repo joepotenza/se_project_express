@@ -8,7 +8,8 @@ const getClothingItems = (req, res, next) => {
   try {
     ClothingItem.find()
       .then((items) => {
-        if (!items || !items.length) {
+        if (!items) {
+          // Return an empty array if no items
           return res.send([]);
         }
         return res.send(items);
@@ -62,16 +63,11 @@ const deleteClothingItem = (req, res, next) => {
             // It was found, obviously that means the user didn't own it.
             throw new ForbiddenError("Forbidden");
           })
-          .catch((err) => {
-            if (err.name === "CastError") {
-              next(new BadRequestError("Invalid Clothing Item ID"));
-            } else {
-              next(err);
-            }
-          });
+          .catch(next); // Send caught error to error handler middleware
       })
       .catch((err) => {
         if (err.name === "CastError") {
+          // validation middleware should catch this but just in case
           next(new BadRequestError("Invalid Clothing Item ID"));
         } else {
           next(err);
@@ -96,6 +92,7 @@ const likeClothingItem = (req, res, next) => {
         if (err.name === "DocumentNotFoundError") {
           next(new NotFoundError("Clothing item not found"));
         } else if (err.name === "CastError") {
+          // validation middleware should catch this but just in case
           next(new BadRequestError("Invalid Clothing Item ID"));
         } else {
           next(err);

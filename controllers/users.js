@@ -119,7 +119,7 @@ const login = (req, res, next) => {
       res.status(200).send({ token });
     })
     .catch(() =>
-      next(new UnauthorizedError("Invalid email address or password"))
+      next(new UnauthorizedError("Incorrect email address or password"))
     );
 };
 

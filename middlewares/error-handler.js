@@ -1,7 +1,6 @@
 const { INTERNAL_SERVER_ERROR } = require("../utils/errors");
 
 const errorHandler = (err, req, res, next) => {
-  console.error(err);
   // if an error has no status, set it to 500
   const { statusCode = INTERNAL_SERVER_ERROR, message } = err;
   res.status(statusCode).send({
