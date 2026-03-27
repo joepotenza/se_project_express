@@ -8,15 +8,18 @@ This is the Back End for the WTWR (What to Wear) project located at [https://git
 - Express
 - MongoDB
 - Mongoose
+- BCrypt
+- Celebrate and Joi
 - ESLint + Prettier
 
 ## Project Preview
 
-The API can be previewed at [https://api.wtwr.bigjoepo.com/](https://api.wtwr.bigjoepo.com/)
+The API can be accessed at [https://api.wtwr.bigjoepo.com/](https://api.wtwr.bigjoepo.com/)
 
-A walkthrough video is available:
+Two walkthrough videos are available:
 
 - [API Walkthrough](https://drive.google.com/file/d/1AHoDeRBhWEgicF6doNPH9nxnDzWvALCJ/view?usp=sharing)
+- [Logging, Error Handling, and Validation Walkthrough](https://www.loom.com/share/0a8bfcaeb3374b1eba3c6a91566ea790)
 
 ## Available Endpoints
 
@@ -35,8 +38,8 @@ Adds a new user and returns the user record
 {
   "_id": "69bf913f4174d1f824972e54",
   "name": "Joe Potenza",
-  "email": "joseph.potenza@gmail.com",
-  "avatar": "https://www.notmyavatar.com",
+  "email": "email@domain.com",
+  "avatar": "https://www.notmyavatar.com/avatar.png",
   "__v": 0
 }
 ```
@@ -68,8 +71,8 @@ Returns the current logged in user
 {
   "_id": "69bf913f4174d1f824972e54",
   "name": "Joe Potenza",
-  "email": "joseph.potenza@gmail.com",
-  "avatar": "https://www.notmyavatar.com",
+  "email": "email@domain.com",
+  "avatar": "https://www.notmyavatar.com/avatar.png",
   "__v": 0
 }
 ```
@@ -91,8 +94,8 @@ Update the user's name and avatar <br>
 {
   "_id": "69bf913f4174d1f824972e54",
   "name": "Joe Potenza",
-  "email": "joseph.potenza@gmail.com",
-  "avatar": "https://i.imgur.com/ZBAqJS7.png",
+  "email": "email@domain.com",
+  "avatar": "https://www.notmyavatar.com/avatar.png",
   "__v": 0
 }
 ```
@@ -108,12 +111,7 @@ Returns an array of all clothing items in the database
     "name": "T-Shirt",
     "weather": "warm",
     "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09",
-    "owner": {
-      "_id": "69bf913f4174d1f824972e54",
-      "name": "Joe Potenza",
-      "avatar": "https://i.imgur.com/ZBAqJS7.png",
-      "__v": 0
-    },
+    "owner": "69bf913f4174d1f824972e54",
     "likes": [],
     "createdAt": "2026-03-17T20:56:18.962Z",
     "__v": 0
